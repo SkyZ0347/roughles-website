@@ -14,6 +14,16 @@ dist-ssr
 coverage
 *.local
 
+/data/
+/discord-auth-server/
+/src/assets/Loteria/
+/src/assets/Roughles_Bold.svg
+/src/components/AuthMenu.vue
+/src/components/LoteriaPanel.vue
+/src/components/LoteriaPanel new.vue
+/src/components/Opening.vue
+/src/views/LotteryView.vue
+
 /cypress/videos/
 /cypress/screenshots/
 

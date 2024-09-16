@@ -1,75 +1,128 @@
 <script setup>
-import Painting from '../components/MareckiPainting.vue'
+import PageHeader from "../components/PageHeader.vue";
+import ONas from '../components/ONas.vue';
+import SocialMedia from "../components/SocialMedia.vue";
+import NasiGracze from "../components/NasiGracze.vue";
+import ClanRewards from "../components/ClanRewards.vue";
+import Footer from "../components/PageFooter.vue";
+
+import { ref, computed } from 'vue';
+defineProps(['navItems', 'style']);
+//import { useRouter } from "vue-router";
+//const router = useRouter();
+const scrollTop = ref(0);
+
+const handleScroll = () => {
+  scrollTop.value = document.querySelector('.mainContent').scrollTop;
+  //headerStyle();
+};
+
+// const headerStyle = () => {
+//   const headr = document.querySelector('.headr');
+//   const shadowIntensity = Math.min(scrollTop.value / 30, 1);
+
+//   headr.style.boxShadow = `0 6px 4px rgba(0, 0, 0, ${0.7 * shadowIntensity})`;
+//   headr.style.transition = 'box-shadow 0.3s ease';
+// };
+
+function scrollToElement(section) {
+  const main = document.querySelector('.mainContent');
+  section.style = 'filter: brightness(200%)';
+
+  setTimeout(() => {
+    section.style.transition = 'filter 1s ease';  // Add the transition
+    section.style.filter = 'brightness(100%)';  // Change the brightness back to normal
+  }, 100);
+
+  const headerOffset = document.querySelector('.headr')?.offsetHeight || 0; // Example if there is a fixed header
+  const elementPosition = section.getBoundingClientRect().top + window.scrollY;
+  const offsetPosition = elementPosition - headerOffset;
+
+  main.scrollTo({
+    top: offsetPosition,  // Scroll to the calculated position
+    behavior: 'smooth'  // Use smooth scrolling
+ });
+}
+
+const handleO_NAS = () => {
+  const section = document.querySelector('.onas');
+  scrollToElement(section);
+};
+
+const handleSOCIAL_MEDIA = () => {
+  const section = document.querySelector('.socialmedia');
+  scrollToElement(section);
+};
+
+const handleGRACZE = () => {
+  const section = document.querySelector('.nasigracze');
+  scrollToElement(section);
+};
+
+// const handleNAGRODY = () => {
+//   console.log('NAGRODY clicked');
+//   router.push('/Loteria');
+// };
+
+const handleKONTAKT = () => {
+  const section = document.querySelector('.kontakt');
+  scrollToElement(section);
+};
+
+const navItemsPageOne = [
+  { label: 'O NAS', action: handleO_NAS },
+  { label: 'SOCIAL MEDIA', action: handleSOCIAL_MEDIA },
+  { label: 'GRACZE', action: handleGRACZE },
+  // { label: 'NAGRODY', action: handleNAGRODY },
+  { label: 'KONTAKT', action: handleKONTAKT }
+];
+
+
 </script>
 
 <template>
-  <main class="content">
-    <div class="content_main">
-      <Painting />
-      <img src="../assets/photos/placeholder main.jpg">
-      <h1>Tytuł</h1>
-      <p>Opis przykładowy do zmiany</p>
+  <PageHeader :navItems="navItemsPageOne" class="headr" ref="header"></PageHeader>
+  <main @scroll="handleScroll" class="mainContent">
+    <div id="content">
+      <ONas class="onas section" />
+      <SocialMedia class="socialmedia section" />
+      <ClanRewards ref="clanRewards" :scrollTop="scrollTop" />
+      <NasiGracze class="nasigracze section" />
+      <Footer class="kontakt section" />
     </div>
-    <!-- <div class="content_editor">
-      <img src="../assets/photos/placeholder1.jpg">
-    </div> -->
   </main>
 </template>
 
 <style scoped lang="scss">
-.content{
-  &_main{
-    width: 100%;
-    margin: 100px 0px 0px 0px;
-    padding: 0;
-    transition: margin-top 0.5s ease;
-    overflow: hidden;
-    &:after{
-      content: '';
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      top: 0;
-      left: 0;
-      background: linear-gradient(110deg  , rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
-    }
-    img{
-      width: 100%;
-    }
-    h1{
-      font-size: 5vw;
-      color: #E2F3F1;
-      position: absolute;
-      text-align: right;
-      top: 2vh;
-      right: 4vw;
-      z-index: 2;
-    }
-    p{
-      font-size: 2vw;
-      color: #E2F3F1;
-      position: absolute;
-      text-align: right;
-      top: 11vw;
-      right: 4vw;
-      z-index: 2;
-    }
-  }
-  &_editor{
-    //position: absolute;
-    margin-top: -10px;
-    background: #58B9AF;
-    z-index: 1;
-    img{
-      height: 50vh;
-      margin: 5vh;
-    }
-  }
+#app {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
-@media only screen and (max-width: 700px){
-  .content_main{
-    margin-top: 70px;
+main {
+  height: calc(100vh - 5.1rem);
+  margin-top: 5.1rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+#content {
+  width: 80vw;
+  max-width: 1200px;
+  height: 300px;
+  margin: 0px auto;
+}
+
+.section {
+  filter: brightness(100%);
+}
+
+@media only screen and (max-width: 800px) {
+  main {
+    margin-top: 0;
+    top: 0;
   }
 }
 </style>

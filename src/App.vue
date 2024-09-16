@@ -1,47 +1,46 @@
 <script setup>
-import Header from "./components/MareckiHeader.vue";
-import Footer from "./components/MareckiFooter.vue";
+import { RouterView } from 'vue-router';
+
 </script>
 
 <template>
-  <Header />
-  <RouterView />
-  <Footer />
+  <div id="content">
+    <router-view></router-view>
+    <!-- <router-view class="router-view" v-slot="{Component}">
+      <Transition name="loteria" mode="out-in">
+        <component :is="Component" />
+      </Transition>
+    </router-view> -->
+  </div>
 </template>
 
 <style scoped lang="scss">
-*{
-  font-family: 'Fredoka', sans-serif;
-  font-family: 'Quicksand', sans-serif;
-  user-select: none;
+
+@font-face {
+  font-family: Lato;
+  src: url('/src/assets/LatoWeb-Bold.ttf');
 }
 
-@keyframes copieddiv{
-  0%{
-    width: 11vh;
-    left: 38vh;
-  }
-  100%{
-    width: 16.7vh;
-    left: 32.3vh;
-  }
+@font-face {
+  font-family: GrubyFont;
+  src: url('/src/assets/BoldFont.ttf');
 }
-@keyframes copiedtext{
-  0%{ content: "Skopiuj"; }
-  10%{ content: "Skopiu"; }
-  20%{ content: "Skopio"; }
-  30%{ content: "Skopiow"; }
-  40%{ content: "Skopiowa"; }
-  50%{ content: "Skopiowan"; }
-  60%{ content: "Skopiowano"; }
-  70%{ content: "Skopiowano"; }
-  80%{ content: "Skopiowano"; }
-  90%{ content: "Skopiowano"; }
-  100%{ content: "Skopiowano"; }
+
+@font-face {
+  font-family: BHFont;
+  src: url('/src/assets/BHFont.otf');
 }
-@media only screen and (max-width: 1400px) {
-  .content_contact_blocks_phone h2 {
-    display: none;
-  }
+
+*{
+  //font-family: 'Fredoka', sans-serif;
+  font-family: 'Lato';
+  user-select: none;
+}
+#content{
+  width: 100vw;
+}
+
+@media only screen and (max-width: 1920px) {
+  
 }
 </style>

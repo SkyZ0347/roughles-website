@@ -1,4 +1,36 @@
 @import './base.css';
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
 body{
-    background: #fffffe;
+    background: url('/src/assets/photos/Background.avif') no-repeat center center fixed;
+    background-size: cover;
+    overflow: hidden;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
+
+::-webkit-scrollbar {
+    width: 10px; /* Adjust width as needed */
+  }
+  ::-webkit-scrollbar-track {
+    background: #0a0b13; /* Background of the track */
+  }
+  
+  /* Scrollbar Thumb */
+  ::-webkit-scrollbar-thumb {
+    background-color: #23263b; /* Background of the scrollbar thumb */
+    border-radius: 10px; /* Rounded corners for a cleaner look */
+    border: 2px solid #0a0b13; /* Optional: Border to match the track color */
+  }
+  
+  /* Scrollbar Button (arrows) */
+  ::-webkit-scrollbar-button {
+    display: none; /* Hide the scrollbar arrows */
+  }
